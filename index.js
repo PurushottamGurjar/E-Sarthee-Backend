@@ -3,7 +3,7 @@ import http from "http";
 import ejs from "ejs";
 import path from "path";
 import { Server } from "socket.io";
-
+const port =process.env.PORT || 3030;
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
@@ -42,6 +42,6 @@ app.get("/", (req,res)=>{
 })
 
 
-server.listen(3030,(req,res)=>{
-    console.log("Thanks for choosing the express and websocket and your server is listening on port ", 3030);
+server.listen(port ,(req,res)=>{
+    console.log("Thanks for choosing the express and websocket and your server is listening on port ", port);
 });
