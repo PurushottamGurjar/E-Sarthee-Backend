@@ -1,4 +1,4 @@
-alert("this is the confirmation alert , good to have it main");
+
 document.addEventListener("DOMContentLoaded", () => {
   const socket = io();
 

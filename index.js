@@ -37,13 +37,10 @@ app.get("/send-location",(req,res)=>{
     res.render("senderIndex");
 })
 
-app.get("/viewer", (req,res)=>{
+app.get("/", (req,res)=>{
     res.render("viewerIndex");
 })
 
-app.get("/",(req,res)=>{
-    res.send("Hi this is the custom home page for the server you can visit to the respective locaton page");
-});
 
 server.listen(3030,(req,res)=>{
     console.log("Thanks for choosing the express and websocket and your server is listening on port ", 3030);
