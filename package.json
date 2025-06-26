@@ -1,0 +1,18 @@
+{
+  "name": "learning1",
+  "version": "1.0.0",
+  "description": "this is the learning to implement the websocket serrver",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "author": "Purushottam gurjar",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "nodemon": "^3.1.10",
+    "socket.io": "^4.8.1"
+  }
+}
