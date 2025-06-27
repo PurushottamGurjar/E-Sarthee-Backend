@@ -3,45 +3,50 @@ import http from "http";
 import ejs from "ejs";
 import path from "path";
 import { Server } from "socket.io";
-const port =process.env.PORT || 3030;
-
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-const __filename=fileURLToPath(import.meta.url);
-const __dirname=dirname(__filename);
 
-const app=express();
-const server=http.createServer(app);
+const port = process.env.PORT || 3030;
 
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
-app.use(express.static(path.join(__dirname,"public")));
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
+const app = express();
+const server = http.createServer(app);
 
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-const io=new Server(server);
-io.on("connection",(socket)=>{
-    console.log("you connection setup successfully with ", socket.id);
+app.use(express.static(path.join(__dirname, "public")));
 
-    socket.on("user-location",(data)=>{
-        io.emit("fetch-all-locations",data);
-    })
-
-    socket.on("disconnect",()=>{
-        console.log("your connection with socket is disconnected ",socket.id);
-    })
-
+const io = new Server(server, {
+  cors: {
+    origin: "*", 
+    methods: ["GET", "POST"]
+  }
 });
 
-app.get("/send-location",(req,res)=>{
-    res.render("senderIndex");
-})
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
 
-app.get("/", (req,res)=>{
-    res.render("viewerIndex");
-})
+  socket.on("user-location", (data) => {
+    io.emit("fetch-all-locations", data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
+app.get("/send-location", (req, res) => {
+  res.render("senderIndex");
+});
+
+app.get("/", (req, res) => {
+  res.render("viewerIndex");
+});
 
 
-server.listen(port ,(req,res)=>{
-    console.log("Thanks for choosing the express and websocket and your server is listening on port ", port);
+server.listen(port, () => {
+  console.log("Server is running on port", port);
 });
