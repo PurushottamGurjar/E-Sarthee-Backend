@@ -29,7 +29,7 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   console.log("Socket connected:", socket.id);
 
-  socket.on("user-location", (data) => {
+  socket.on("driver-location", (data) => {
     io.emit("fetch-all-locations", data);
   });
 

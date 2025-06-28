@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     navigator.geolocation.watchPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        socket.emit("user-location", { latitude, longitude });
+        socket.emit("driver-location", { latitude, longitude });
       },
       (error) => {
         console.log("some error is coming while fetching the location from the user", error);
