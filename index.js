@@ -33,6 +33,10 @@ io.on("connection", (socket) => {
     io.emit("fetch-all-locations", data);
   });
 
+  socket.on("driver-location-byID",(data)=>{
+    io.emit("fetch-all-locations-byID",data);
+  })
+
   socket.on("disconnect", () => {
     console.log("Socket disconnected:", socket.id);
   });
@@ -45,6 +49,11 @@ app.get("/send-location", (req, res) => {
 app.get("/send-location-byID", (req, res) => {
   res.render("senderIndexID");
 });
+app.get("/viewbyID",(req,res)=>{
+  res.render('viewerIndexID');
+})
+
+
 
 app.get("/", (req, res) => {
   res.render("viewerIndex");
