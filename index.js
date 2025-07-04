@@ -42,6 +42,10 @@ app.get("/send-location", (req, res) => {
   res.render("senderIndex");
 });
 
+app.get("/send-location-byID", (req, res) => {
+  res.render("senderIndexID");
+});
+
 app.get("/", (req, res) => {
   res.render("viewerIndex");
 });
